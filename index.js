@@ -1,5 +1,9 @@
 (function(){
   "use strict";
+  // generate a random number
+  const random = (from,to) => {
+    return Math.floor(Math.random() * to) + from;
+  };
   // initial data
   const data = {
     background:'red',
@@ -36,7 +40,7 @@
     background:${data.background};
     width:${data.current.width}px;
     height:${data.current.height}px;
-    border:${data.background === 'white' ? data.border : ''};
+    border:${data.background === 'white' ? data.border : 'none'};
     transform:${data.current.id === 'line' ? `rotate(${data.current.degree}deg)` : ''}
     `);
   }
@@ -79,12 +83,14 @@
   window.onmousedown = (ev => {
     const element = document.createElement('span');
     element.className = data.current.id;
+    // generate an unique id
+    element.id = random(0, 9999999999999);
     element.setAttribute('style',`top:${ev.clientY -10}px;
     left:${ev.clientX - 10}px;
     background:${data.background};
     width:${data.current.width}px;
     height:${data.current.height}px;
-    transform:${data.current.id === 'line' ? `rotate(${data.current.degree}deg)` : ''}
+    transform:${data.current.id === 'line' ? `rotate(${data.current.degree}deg)` : 'none'}
     `); 
     document.querySelector('body').appendChild(element);
   });
