@@ -1,5 +1,7 @@
 (function(){
   "use strict";
+  // inserted elements ids
+  const id = [];
   // generate a random number
   const random = (from,to) => {
     return Math.floor(Math.random() * to) + from;
@@ -70,6 +72,10 @@
     if(ev.key === 'c'){
       data.background =prompt('please enter the name of a color : ');
     }
+    if(ev.key === 'b'){
+      document.getElementById(`${id[id.length - 1]}`).remove();
+      id.pop();
+    }
     onMouseElementChange(ev);
   });
   // on mouse moving listener
@@ -93,5 +99,7 @@
     transform:${data.current.id === 'line' ? `rotate(${data.current.degree}deg)` : 'none'}
     `); 
     document.querySelector('body').appendChild(element);
+    // push element's id to the following array
+    id.push(element.id);
   });
 })();
